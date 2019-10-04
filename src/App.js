@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchField from "./SearchField";
 import CardList from "./CardList";
 import { SWAPI } from "./config/keys";
@@ -7,11 +7,19 @@ const App = () => {
   const [people, setPeople] = useState([]);
   const [searchField, setSearchField] = useState("");
 
-  const fetchData = (async () => {
-    const res = await fetch(SWAPI);
-    const json = await res.json();
-    setPeople(json.results);
-  })();
+  //   Callback function will be executed after the component is rendered.
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(SWAPI);
+        const json = await res.json();
+        setPeople(json.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const onSearchChange = e => {
     setSearchField(e.target.value);
