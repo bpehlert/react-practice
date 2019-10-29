@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchField from "./SearchField";
 import CardList from "./CardList";
-import { SWAPI } from "./config/keys";
+import { SWAPI } from "../config/keys";
 
 const App = () => {
   const [people, setPeople] = useState([]);
