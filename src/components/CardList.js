@@ -1,11 +1,11 @@
 import React from "react";
 import Card from "./Card";
 
-const CardList = ({ people }) => {
+const CardList = ({ members }) => {
   return (
     <div className="listContainer">
-      {people.map((person, i) => {
-        return <Card key={i} name={person.name} birth={person.birth_year} />;
+      {members.map((person, i) => {
+        return <Card key={i} name={person.name} />;
       })}
     </div>
   );
