@@ -4,8 +4,8 @@ import Card from "./Card";
 const CardList = ({ members }) => {
   return (
     <div className="listContainer">
-      {members.map((person, i) => {
-        return <Card key={i} name={person.name} />;
+      {members.map((member, i) => {
+        return <Card key={i} name={member.name} birth={member.birth_year} />;
       })}
     </div>
   );

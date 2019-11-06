@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { SWAPI } from "../config/keys";
 import CardList from "./CardList";
+import SearchBox from "./SearchBox";
 
 class App extends Component {
   constructor() {
@@ -12,18 +13,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const fetchData = async () => {
+    const fetchData = async url => {
       try {
-        const res = await fetch(SWAPI);
-        const json = await res.json();
+        const res = await fetch(url);
+        const data = await res.json();
         this.setState({
-          members: json.results
+          members: data.results
         });
       } catch (error) {
         console.log(error);
       }
     };
-    fetchData();
+    fetchData(SWAPI);
   }
 
   onSearchChange = e => {
@@ -33,20 +34,18 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
     const { members, searchField } = this.state;
+
     const filteredMembers = members.filter(member => {
-      return member.name.toLowerCase().includes(searchField.toLowerCase());
+      return member.name
+        .toLowerCase()
+        .includes(searchField.toLocaleLowerCase());
     });
 
     return (
       <div>
-        <h1>STAR WARD</h1>
-        <input
-          className="searchField"
-          placeholder="Search member"
-          onChange={this.onSearchChange}
-        />
+        <h1>Star Ward</h1>
+        <SearchBox onSearchChange={this.onSearchChange} />
         <CardList members={filteredMembers} />
       </div>
     );
