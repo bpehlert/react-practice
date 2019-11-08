@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { SWAPI } from "../config/keys";
 import CardList from "./CardList";
 import SearchBox from "./SearchBox";
+import Loading from "./Loading";
 
 class App extends Component {
   constructor() {
@@ -34,6 +35,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.members.length > 0 ? "Members" : "Loading...");
     const { members, searchField } = this.state;
 
     const filteredMembers = members.filter(member => {
@@ -46,7 +48,11 @@ class App extends Component {
       <div>
         <h1>Star Ward</h1>
         <SearchBox onSearchChange={this.onSearchChange} />
-        <CardList members={filteredMembers} />
+        {members.length > 0 ? (
+          <CardList members={filteredMembers} />
+        ) : (
+          <Loading />
+        )}
       </div>
     );
   }
