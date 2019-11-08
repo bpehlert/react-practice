@@ -2,7 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div>
+    <div className="loadingDiv">
       <img
         src="https://www.madhyamtech.com/assets/loader.gif"
         alt="loading_img"
